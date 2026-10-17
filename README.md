@@ -1,3 +1,3 @@
 # BioLit
-Some bioinformatic untilits for simple data processing
+Some bioinformatic utilits for simple data processing
 v1
