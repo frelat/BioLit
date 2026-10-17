@@ -1,4 +1,30 @@
-def fqfilter(block, gc_bounds, length_bounds, quality_threshold):
+def fqfilter(
+    block: str,
+    gc_bounds: (int | float | tuple),
+    length_bounds: (int | float | tuple),
+    quality_threshold: (int | float),
+) -> bool:
+    """
+    Check whether a single FASTQ record passes all filters.
+
+    Filters run in this order: GC content -> length -> mean quality.
+    If the read fails a filter, the remaining checks are skipped.
+
+    Args:
+        block (str): FASTQ record of 4 lines joined into one string
+            (header, sequence, "+", quality string).
+        gc_bounds (int | float | tuple): GC content bounds in percent.
+            A number sets the upper bound (lower bound is 0); a tuple sets
+            (lower, upper). (0, 100) disables the filter.
+        length_bounds (int | float | tuple): Read length bounds. A number
+            sets the upper bound; a tuple sets (lower, upper).
+            (0, 2**32) disables the filter.
+        quality_threshold (int | float): Minimum mean Phred33 quality.
+            0 disables the filter.
+
+    Returns:
+        bool: True if the read passes all filters, False otherwise.
+    """
 
     def fqfilter_qt(block, quality_threshold=0):
         if quality_threshold == 0:

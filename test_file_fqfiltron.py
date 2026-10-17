@@ -1,6 +1,6 @@
-import fqfiltron
+import BioLit
 
-fqfiltron.fqfiltron(
+BioLit.fqfiltron(
     "data/example_fastq.fastq",
     gc_bounds=(0, 100),
     length_bounds=(0, 2**32),
